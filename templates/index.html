@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 4</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1>Weight System</h1>
+    </header>
+      
+    <main>
+        <h2>Welcome to Weight Management System!</h2>
+    </main>
+
+    <div class="box-container">
+        <div class="box">
+            <p id="receiveBox"></p> <!-- Only this box will display the received data -->
+        </div>
+      
+        <div class="box1">
+            <p id="chickenBox"></p> <!-- Chicken box is left empty -->
+        </div>
+    </div>
+
+    <footer>
+        <p>Team 4</p>
+    </footer>
+
+    <p>
+        Async mode is: <b>{{ async_mode }}</b><br>
+    </p>
+
+    <button id="connectButton">Start Recording</button>
+    <button id="disconnectButton">Disconnect</button>
+    <button id="resumeButton">Resume Recording</button> <!-- New button for resuming recording -->
+    <button id="redirectToHTML2">Go to Camera</button> <!-- Button to redirect to HTML 2 -->
+
+    <div id="log"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var socket = io();
+
+            $('#connectButton').click(function() {
+                socket.emit('connect_button_clicked');
+            });
+
+            $('#disconnectButton').click(function() {
+                socket.emit('disconnect_button_clicked'); // Emitting disconnect event
+            });
+
+            $('#resumeButton').click(function() {
+                socket.emit('resume_recording'); // Emitting resume recording event
+            });
+
+            // Redirect to HTML 2 when the button is clicked
+            $('#redirectToHTML2').click(function() {
+                window.location.href = 'templates/index2.html'; // Replace 'path_to_html_2' with the actual path to HTML 2
+            });
+
+            $('#redirectToHTML2').click(function() {
+                window.location.href = '/camera';
+            });
+
+
+            socket.on('connected_response', function(msg) {
+                // Append the received data to the receiveBox
+                $('#receiveBox').append('<br>' + $('<div/>').text(msg.data).html());
+                // Scroll to the bottom of the receiveBox
+                $('#receiveBox').scrollTop($('#receiveBox')[0].scrollHeight);
+
+                // Append the received data to the chickenBox
+                $('#chickenBox').append('<br>' + $('<div/>').text(msg.data).html());
+                // Scroll to the bottom of the chickenBox
+                $('#chickenBox').scrollTop($('#chickenBox')[0].scrollHeight);
+            });
+
+            socket.on('pig_response', function(msg) {
+                // Append the received data to the receiveBox
+                $('#receiveBox').append('<br>' + $('<div/>').text(msg.data).html());
+                // Scroll to the bottom of the receiveBox
+                $('#receiveBox').scrollTop($('#receiveBox')[0].scrollHeight);
+            });
+
+            socket.on('chicken_response', function(msg) {
+                // Append the received data to the chickenBox
+                $('#chickenBox').append('<br>' + $('<div/>').text(msg.data).html());
+                // Scroll to the bottom of the chickenBox
+                $('#chickenBox').scrollTop($('#chickenBox')[0].scrollHeight);
+            });
+
+            // Handle messages in the log
+            socket.on('connect_message', function(msg) {
+                $('#log').append('<br>' + $('<div/>').text(msg.data).html());
+                // Remove the message after 3 seconds
+                setTimeout(function() {
+                    $('#log').text('');
+                }, 7000);
+            });
+
+            socket.on('disconnect_message', function(msg) {
+                $('#log').append('<br>' + $('<div/>').text(msg.data).html());
+                // Remove the message after 3 seconds
+                setTimeout(function() {
+                    $('#log').text('');
+                }, 7000);
+            });
+
+            socket.on('resume_message', function(msg) {
+                $('#log').append('<br>' + $('<div/>').text(msg.data).html());
+                // Remove the message after 3 seconds
+                setTimeout(function() {
+                    $('#log').text('');
+                }, 7000);
+            });
+
+        });
+    </script>
+</body>
+</html>

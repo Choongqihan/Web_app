@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character set for the document -->
+    <meta charset="UTF-8" />
+    <!-- Viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title of the webpage -->
+    <title>Livestock-Learner</title>
+    <!-- Internal CSS for styling the webpage -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif; /* Default font for the webpage */
+      }
+      .container {
+        text-align: center; /* Center-aligns the content of the container */
+        margin-top: 50px; /* Adds a margin at the top for spacing */
+      }
+      #title {
+        font-size: 64px; /* Sets the font size for the title */
+      }
+      #video-feed {
+        width: 640px; /* Default width for the video feed */
+        height: 480px; /* Default height for the video feed */
+        border: 2px solid black; /* Adds a black border around the video feed */
+        background-color: #000; /* Sets the background color of the video feed to black */
+        margin: 0 auto; /* Centers the video feed horizontally */
+      }
+      .btn {
+        display: block; /* Makes the button a block element */
+        padding: 10px 20px; /* Adds padding inside the button */
+        margin: 20px auto; /* Centers the button and adds margin for spacing */
+        font-size: 18px; /* Sets the font size for the text inside the button */
+        cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+      }
+      .btn + .btn {
+        margin-top: 32px; /* Adds spacing between consecutive buttons */
+      }
+    </style>
+    <!-- Including the Socket.IO Client Library -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        // Establishes a connection to the Socket.IO server
+        const socket = io.connect(
+          location.protocol + "//" + document.domain + ":" + location.port
+        );
+        const videoFeed = document.getElementById("video-feed"); // Selects the video feed element
+
+        // Updates the video feed when a new frame is received from the server
+        socket.on("video_frame", function (data) {
+          // Converts the received binary data to a base64 encoded string
+          const src =
+            "data:image/jpeg;base64," +
+            btoa(
+              new Uint8Array(data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ""
+              )
+            );
+          // Sets the src attribute of the video feed element to the base64 encoded image
+          videoFeed.src = src;
+        });
+
+        // Adjusts the size of the video feed based on the resolution information received from the server
+        socket.on("video_resolution", function (resolution) {
+          videoFeed.style.width = resolution.width + "px";
+          videoFeed.style.height = resolution.height + "px";
+        });
+
+        // Automatically starts the video stream when the page loads
+        socket.emit("start_video");
+
+        // Captures an image when the capture button is clicked
+        document.querySelector(".btn").addEventListener("click", function () {
+          socket.emit("capture_image");
+        });
+
+        // Back button event handler
+        document.getElementById("backButton").addEventListener("click", function() {
+          window.location.href = "/"; // Navigate back to the index.html page
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Page title -->
+      <h1 id="title">Livestock-Learner</h1>
+      <!-- Container for the video feed, displayed as an image -->
+      <img id="video-feed" />
+      <!-- Button to trigger image capture -->
+      <button class="btn">Capture</button>
+      <!-- Back button to navigate back to index.html -->
+      <button id="backButton" class="btn">Back</button>
+    </div>
+  </body>
+</html>

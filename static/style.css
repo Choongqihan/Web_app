@@ -1,0 +1,139 @@
+/* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    position: relative; /* Ensure proper positioning */
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+main {
+    padding: 20px;
+    color: #333;
+}
+
+h1, h2 {
+    margin-bottom: 10px;
+    
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.box-container {
+    display: flex; /* Container becomes a flex container */
+    justify-content: center; /* Center children horizontally */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto; /* Vertically center the container */
+    background-color: #333;
+    
+}
+
+.box{
+    width: 400px; /* Increase the width */
+    height: 400px; /* Increase the height */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    margin: 20px;
+    padding: 60px 50px 30px; /* Add padding to the top */
+    border-radius: 10px;
+    position: relative; /* Set position relative */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+#receiveBox {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+    padding: -10px 50px 30px; /* Adjusted padding to match .box1 */
+    border-radius: 10px;
+    position: relative;
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+}
+
+.box1 {
+width: 400px; /* Increase the width */
+    height: 400px; /* Increase the height */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    margin: 20px;
+    padding: 60px 50px 30px; /* Add padding to the top */
+    border-radius: 10px;
+    position: relative; /* Set position relative */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+#chickenBox {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+    padding: -10px 50px 30px; /* Adjusted padding to match .box1 */
+    border-radius: 10px;
+    position: relative;
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+}
+
+
+
+.box::before {
+    content: "Pig"; /* Text for the header */
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Height of the header */
+    background-color: #333; /* Color for the header */
+    border-top-left-radius: 10px; /* Adjust border-radius to match the box */
+    border-top-right-radius: 10px; /* Adjust border-radius to match the box */
+    color: white; /* Text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold; /* Optionally set font weight */
+    
+}
+
+.box1::before {
+    content: "Chicken"; /* Text for the header */
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Height of the header */
+    background-color: #333; /* Color for the header */
+    border-top-left-radius: 10px; /* Adjust border-radius to match the box */
+    border-top-right-radius: 10px; /* Adjust border-radius to match the box */
+    color: white; /* Text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold; /* Optionally set font weight */
+}
+
+
