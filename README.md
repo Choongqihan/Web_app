@@ -65,13 +65,7 @@ To use the webapp, follow these steps:
    - Press the `Capture` button within the webapp to take an image of the current frame.
    - The application will run YOLO inference on the captured image.
    - Results will be saved in the `outputs` folder.
-
-## Contributing
-
-Contributions are welcome! For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
+  
 ## To download image thru URL
    - Paste this URL /download_image/<int:image_id> after the http://127.0.0.1:5000.
    - Change the <int:image_id> with the appropriate ID number in the database using SQL Viewer.
@@ -80,4 +74,12 @@ Please make sure to update tests as appropriate.
 ## To reset database
    - Paste this URL /reset_database after the http://127.0.0.1:5000.
    - Hit enter.
+
+## Contributing
+
+Contributions are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+
 
