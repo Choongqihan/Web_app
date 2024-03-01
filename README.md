@@ -1,4 +1,3 @@
-```python
 # Livestock-Learner Web Application (temporary title)
 
 For: Design of Deep Learning-Based Multi-Object Weight Estimation for Livestock Management
@@ -81,4 +80,4 @@ Please make sure to update tests as appropriate.
 ## To reset database
    - Paste this URL /reset_database after the http://127.0.0.1:5000.
    - Hit enter.
-```
+
