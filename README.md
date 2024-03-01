@@ -1,8 +1,7 @@
-# Web_app
 ```python
-# Project Title
+# Livestock-Learner Web Application (temporary title)
 
-Brief description of what the project does and who it's for.
+For: Design of Deep Learning-Based Multi-Object Weight Estimation for Livestock Management
 
 ## Prerequisites
 
