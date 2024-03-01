@@ -1,6 +1,6 @@
 # Livestock-Learner Web Application (temporary title)
 
-For: Design of Deep Learning-Based Multi-Object Weight Estimation for Livestock Management
+###For: Design of Deep Learning-Based Multi-Object Weight Estimation for Livestock Management
 
 ## Prerequisites
 
