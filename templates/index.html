@@ -31,10 +31,6 @@
         <p>Team 4</p>
     </footer>
 
-    <p>
-        Async mode is: <b>{{ async_mode }}</b><br>
-    </p>
-
     <button id="connectButton">Start Recording</button>
     <button id="disconnectButton">Disconnect</button>
     <button id="resumeButton">Resume Recording</button> <!-- New button for resuming recording -->
@@ -100,7 +96,7 @@
                 // Remove the message after 3 seconds
                 setTimeout(function() {
                     $('#log').text('');
-                }, 7000);
+                }, 3000);
             });
 
             socket.on('disconnect_message', function(msg) {
@@ -108,7 +104,7 @@
                 // Remove the message after 3 seconds
                 setTimeout(function() {
                     $('#log').text('');
-                }, 7000);
+                }, 3000);
             });
 
             socket.on('resume_message', function(msg) {
@@ -116,7 +112,7 @@
                 // Remove the message after 3 seconds
                 setTimeout(function() {
                     $('#log').text('');
-                }, 7000);
+                }, 3000);
             });
 
         });

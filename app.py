@@ -203,6 +203,7 @@ def image():
 def back():
     return redirect(url_for('home'))  # Redirect to the home page
 
+#Put this in the URL and change the <int:image_id> to the appropriate ID number in the database
 @app.route('/download_image/<int:image_id>')
 def download_image(image_id):
     # Connect to your SQLite database
@@ -218,10 +219,10 @@ def download_image(image_id):
         conn.close()
         return "Image not found", 404
 
-    # Define the path where you want to save the image
-    desktop_path = 'C:\\Users\\CHOT\\Desktop'
+    # Define the path where you want to save the image 
+    downloads_path = os.path.expanduser('~/Downloads')
     filename = f'image_{image_id}.jpg'
-    file_path = os.path.join(desktop_path, filename)
+    file_path = os.path.join(downloads_path, filename)
 
     # Write the image data to a file on the desktop
     with open(file_path, 'wb') as file:
@@ -231,7 +232,6 @@ def download_image(image_id):
     conn.close()
 
     return send_file(file_path, as_attachment=True)
-
 
 # Main entry point for the Flask application
 if __name__ == "__main__":
